@@ -1,7 +1,9 @@
 const mongoose=require('mongoose')
 const courseSchema =new mongoose.Schema({
     author:{
-        type:String,
+        
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Author",
         required:true,
         trim:true
     },
@@ -32,6 +34,13 @@ const courseSchema =new mongoose.Schema({
         },
         get:v=>Math.round(v),
         set:v=>Math.round(v)
+
+    },
+    rating:{
+        type:Number,
+        default:0,
+        minlength:0,
+        maxlength:5
 
     },
    
