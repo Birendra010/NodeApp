@@ -1,7 +1,6 @@
 const mongoose=require('mongoose')
 const courseSchema =new mongoose.Schema({
     author:{
-        
         type:mongoose.Schema.Types.ObjectId,
         ref:"Author",
         required:true,
@@ -11,6 +10,7 @@ const courseSchema =new mongoose.Schema({
         type:String,
         required:true,
         trim:true
+
     },
     tags:{
         type:Array,
