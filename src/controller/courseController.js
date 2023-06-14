@@ -6,9 +6,9 @@ const Author = require('../Model/authorModel')
 
 const registerAuthor = async (req, res) => {
   try {
-    let { author, specialization} = req.body;
-    if (!author)
-      return res.status(400).send({ message: "auther  is required" });
+    let { name, specialization} = req.body;
+    if (!name)
+      return res.status(400).send({ message: " name is required" });
    
 
     let savedData = await Author.create(req.body);
@@ -44,7 +44,8 @@ const createCourse = async (req, res) => {
 /// ****** get All course *******
 const getAllCourses = async (req, res) => {
   try {
-    const allcourse = await Course.find();
+    const allcourse = await Course.find()
+    
 
     // .count()
     // .skip(2)
@@ -66,7 +67,9 @@ const getAllCourses = async (req, res) => {
 const getCourseById = async (req, res) => {
   try {
     let id = req.params.id;
-    const course = await Course.findById({ _id: id });
+    const course = await Course.findById({ _id: id })
+    .populate('author','name')
+    .select({'name':1,'price':1,'_id':0,'course':1})
     if (!course)
       return res
         .status(404)
